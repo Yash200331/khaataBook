@@ -7,7 +7,7 @@ const { isLoggedIn, redirectIfLoggedIn } = require('../middlewares/auth-middlewa
 router.get('/', redirectIfLoggedIn, landingPageController);
 router.get('/register', registerPageController);
 router.post('/register', registerController);
-router.post('/login', isLoggedIn, loginController);
+router.post('/login', loginController);
 router.get('/logout', logoutController);
 router.get('/profile', isLoggedIn, profileController);
 

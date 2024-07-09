@@ -4,26 +4,35 @@ module.exports.isLoggedIn = async function (req, res, next) {
     if (req.cookies.token) {
         try {
             let decoded = await jwt.verify(req.cookies.token, process.env.JWT_KEY);
-            let user = await userModel.findOne({email: decoded.email});
-            req.user = user;
-            next();
-
-            }catch(err){
-                res.send(err.message)
+            
+            
+            let user = await userModel.findOne({ email: decoded.email });
+            if (!user) {
+                console.log("User not found");
+                return res.redirect('/');
             }
+
+            req.user = user;
+            
+            next();
+        } catch (err) {
+            console.error("Token verification failed or other error:", err);
+            return res.redirect('/');
         }
-     else {
-        res.redirect('/')
+    } else {
+        console.log("No token found in cookies");
+        return res.redirect('/');
     }
-}
+};
+
 
 module.exports.redirectIfLoggedIn = async function (req, res, next) {
     if (req.cookies.token) {
-        try{
+        try {
             jwt.verify(req.cookies.token, process.env.JWT_KEY);
             res.redirect('/profile')
-        }catch(err){
+        } catch (err) {
             return next();
         }
-    }else return next();
+    } else return next();
 }

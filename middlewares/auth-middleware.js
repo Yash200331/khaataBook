@@ -36,3 +36,4 @@ module.exports.redirectIfLoggedIn = async function (req, res, next) {
         }
     } else return next();
 }
+

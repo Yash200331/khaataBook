@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TechNova</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-sm bg-white rounded-lg shadow-lg p-6">
+        <h2 class="text-2xl font-bold mb-4 text-gray-800 text-center">Login</h2>
+        <form>
+            <div class="mb-4">
+                <label class="block text-gray-700">Email</label>
+                <input type="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none" required>
+            </div>
+            <div class="mb-4 relative">
+                <label class="block text-gray-700">Password</label>
+                <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none" required>
+                <button type="button" id="togglePassword" class="absolute right-2 top-2 text-gray-600">
+                    <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.522 5 12 5c4.478 0 8.268 2.943 9.542 7-.274.805-.645 1.562-1.106 2.25M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 16.057 7.522 19 12 19c4.478 0 8.268-2.943 9.542-7-.274-.805-.645-1.562-1.106-2.25" />
+                    </svg>
+                </button>
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Login</button>
+        </form>
+    </div>
+
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        togglePassword.addEventListener('click', function () {
+            // Toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+
+            // Toggle the eye icon
+            if (type === 'password') {
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.522 5 12 5c4.478 0 8.268 2.943 9.542 7-.274.805-.645 1.562-1.106 2.25M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 16.057 7.522 19 12 19c4.478 0 8.268-2.943 9.542-7-.274-.805-.645-1.562-1.106-2.25" />
+                `;
+            } else {
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A9.97 9.97 0 0112 19c-4.478 0-8.268-2.943-9.542-7 .274-.805.645-1.562 1.106-2.25M14.625 14.625a3.003 3.003 0 01-4.242 0 3.003 3.003 0 010-4.242 3.003 3.003 0 014.242 0M18.825 13.875a9.973 9.973 0 01-1.45 2.375M9.375 9.375L12 12M3 3l18 18" />
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
